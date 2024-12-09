@@ -244,139 +244,69 @@
     let balance = 0;
     let profile = {
         name: "User Name",
-        email: "user@example.com",
+        email: "",
         gender: "male",
-        birthDate: "",
-        phone: "Not Set",
-        image: "https://via.placeholder.com/80"
+        dob: ""
     };
 
-    // Function to show the profile section
+    // Function to display profile details
     function showProfile() {
-        if(localStorage.getItem('profileSaved') === 'true') {
-            document.getElementById('profileName').innerText = localStorage.getItem('username');
-            document.getElementById('profileImage').src = `https://via.placeholder.com/80?text=${localStorage.getItem('username').charAt(0)}`;
-            document.getElementById('profileForm').style.display = 'none';
-            document.getElementById('profileInfo').style.display = 'block';
-        } else {
-            document.getElementById('profileForm').style.display = 'block';
-            document.getElementById('profileInfo').style.display = 'none';
-        }
+        document.getElementById('profileForm').style.display = 'none';
+        document.getElementById('profileInfo').style.display = 'flex';
+        document.getElementById('profileName').textContent = profile.name;
+        document.getElementById('profileImage').src = "https://via.placeholder.com/80"; // You can replace this with a real image URL
     }
 
-    // Function to save profile information
-    function saveProfile() {
-        let username = document.getElementById('username').value;
-        let gender = document.getElementById('gender').value;
-        let birthDate = document.getElementById('birthDate').value;
-        let phone = document.getElementById('phone').value;
-
-        if (username && gender && birthDate && phone) {
-            localStorage.setItem('profileSaved', 'true');
-            localStorage.setItem('username', username);
-            localStorage.setItem('gender', gender);
-            localStorage.setItem('birthDate', birthDate);
-            localStorage.setItem('phone', phone);
-
-            // Update Profile Info Section
-            document.getElementById('profileName').innerText = username;
-            document.getElementById('profileImage').src = `https://via.placeholder.com/80?text=${username.charAt(0)}`;
-            alert('Profile saved successfully!');
-            document.getElementById('profileForm').style.display = 'none';
-        } else {
-            alert('Please fill all the fields');
-        }
-    }
-
-    // Modify showWallet() to show message for Wallet
+    // Function to display wallet (balance)
     function showWallet() {
-        alert("Development in progress. For further details, please contact Admin.");
+        alert("Your current balance is: " + balance + " BDT");
     }
 
-    // Function to open ad link and earn balance
-    function openAd(url, earning, adId) {
-        let startTime = Date.now();  // Record the start time
-
-        // Open the ad in a new window/tab
-        window.open(url, '_blank');
-
-        // Wait for 15 seconds (simulate ad watching time)
-        setTimeout(function() {
-            let elapsedTime = Date.now() - startTime;
-
-            // If the user stayed for at least 15 seconds, update balance
-            if (elapsedTime >= 15000) {
-                updateBalance(earning);
-                document.getElementById(adId).style.display = 'none';
-            } else {
-                alert('You did not watch the ad for 15 seconds. No balance added.');
-            }
-        }, 15000);  // 15 seconds timeout for ad watching
+    // Function to open an ad and update the balance
+    function openAd(adUrl, earning, adId) {
+        window.open(adUrl, '_blank'); // Opens the ad in a new tab
+        balance += earning; // Update balance
+        document.getElementById('balance').textContent = balance.toFixed(2) + " BDT"; // Update balance display
+        document.getElementById(adId).style.display = 'none'; // Hide the ad after clicking
     }
 
-    // Update balance function
-    function updateBalance(credits) {
-        let balance = parseFloat(localStorage.getItem('balance') || '0');
-        balance += credits;
-        localStorage.setItem('balance', balance.toFixed(2));
-        document.getElementById('balance').innerText = `${balance.toFixed(2)} BDT`;
-    }
+    // Function to save profile changes
+    function saveProfile() {
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const gender = document.getElementById('gender').value;
+        const dob = document.getElementById('dob').value;
 
-    // Function to check availability of ads
-    function checkAdAvailability(adId, adUrl, earning, adButtonId) {
-        let lastViewed = localStorage.getItem(adId);
-        let currentTime = Date.now();
-
-        // If the ad was viewed within the last 24 hours, hide it
-        if (lastViewed && (currentTime - lastViewed < 24 * 60 * 60 * 1000)) {
-            document.getElementById(adButtonId).style.display = 'none';
+        if (username && email && gender && dob) {
+            profile.name = username;
+            profile.email = email;
+            profile.gender = gender;
+            profile.dob = dob;
+            alert("Profile saved successfully!");
+            showProfile();
         } else {
-            // If more than 24 hours passed, allow the user to watch the ad
-            document.getElementById(adButtonId).style.display = 'block';
-            document.getElementById(adButtonId).onclick = function() {
-                openAd(adUrl, earning, adId);
-                localStorage.setItem(adId, currentTime);  // Store the current time when ad is clicked
-            };
+            alert("Please fill in all the fields.");
         }
     }
 
-    // Initialize the ads check
-    window.onload = function() {
-        // Check availability of ads based on time
-        checkAdAvailability('ad1', 'https://luglawhaulsano.net/4/8625441', 0.25, 'ad1');
-        checkAdAvailability('ad2', 'https://luglawhaulsano.net/4/8625442', 0.25, 'ad2');
-        checkAdAvailability('ad3', 'https://luglawhaulsano.net/4/8625444', 0.25, 'ad3');
-        checkAdAvailability('ad4', 'https://luglawhaulsano.net/4/8625445', 0.25, 'ad4');
-    }
-</script>
-
-<script>
-    // Function to handle 15 second ad check and updates
-    function openAd(url, earning, adId) {
-        let startTime = Date.now();  // Record the start time
-
-        // Open the ad in a new window/tab
-        window.open(url, '_blank');
-
-        // Wait for 15 seconds (simulate ad watching time)
-        setTimeout(function() {
-            let elapsedTime = Date.now() - startTime;
-
-            // If the user stayed for at least 15 seconds, update balance
-            if (elapsedTime >= 15000) {
-                updateBalance(earning);
-                document.getElementById(adId).style.display = 'none';
-            } else {
-                alert('You did not watch the ad for 15 seconds. No balance added.');
-            }
-        }, 15000);  // 15 seconds timeout for ad watching
+    // Function to show the profile form
+    function showEditProfileForm() {
+        document.getElementById('profileInfo').style.display = 'none';
+        document.getElementById('profileForm').style.display = 'block';
     }
 
-    // Function to update balance
-    function updateBalance(credits) {
-        let balance = parseFloat(localStorage.getItem('balance') || '0');
-        balance += credits;
-        localStorage.setItem('balance', balance.toFixed(2));
-        document.getElementById('balance').innerText = `${balance.toFixed(2)} BDT`;
+    // Function to open help page
+    function openHelp() {
+        alert("For help, visit our support page or contact us at: earningfrommai@gmail.com");
     }
-</script>
+
+    // Function to open admin contact page
+    function openAdminContact() {
+        window.location.href = "mailto:earningfrommai@gmail.com";
+    }
+
+    // Initially, show the profile with default data
+    showProfile();
+    </script>
+</body>
+</html>
