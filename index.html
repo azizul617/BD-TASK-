@@ -54,7 +54,6 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* Balance and Profile */
         .balance-container {
             margin-bottom: 20px;
         }
@@ -83,34 +82,6 @@
             color: #333;
         }
 
-        .profile-section {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .profile-form {
-            display: none;
-            margin-top: 20px;
-        }
-
-        .profile-form input, .profile-form select {
-            padding: 10px;
-            width: 100%;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .profile-form button {
-            padding: 10px 25px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        /* Footer */
         footer {
             margin-top: 30px;
             font-size: 0.9rem;
@@ -126,17 +97,6 @@
             text-decoration: underline;
         }
 
-        /* Task Cards */
-        .ad-container {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
             .container {
                 margin-top: 20px;
@@ -161,329 +121,288 @@
                 padding: 8px 20px;
             }
         }
-
-        /* Fix for Support button alignment in mobile view */
-        @media (max-width: 480px) {
-            .btn {
-                font-size: 0.9rem;
-                padding: 8px 18px;
-            }
-            .menu-buttons {
-                flex-direction: column;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Profile Section -->
-        <div class="profile-info" id="profileInfo">
-            <div class="profile-name" id="profileName">User Name</div>
-            <img src="https://via.placeholder.com/80" id="profileImage" alt="Profile Image">
-        </div>
-
-        <!-- Balance Section -->
-        <div class="balance-container">
-            <h3>Your Balance:</h3>
-            <div class="balance" id="balance">0.00 BDT</div>
-        </div>
-
-        <!-- Menu -->
-        <div class="menu-buttons" style="display: flex; justify-content: space-around; margin-bottom: 20px;">
-            <button class="btn btn-primary" onclick="showProfile()">Profile</button>
-            <button class="btn btn-success" onclick="showWallet()">Wallet</button>
-            <button class="btn btn-warning" onclick="openHelp()">Help</button>
-            <button class="btn btn-danger" onclick="openAdminContact()">Admin Contact</button>
-        </div>
-
-        <!-- Title -->
-        <h2>Earning From M A I</h2>
-
-        <!-- Ads Section -->
-        <div class="ad-container" id="ad1">
-            <p>Watch Ad 1 and Earn 0.25 BDT!</p>
-            <button class="btn btn-primary" onclick="openAd('https://luglawhaulsano.net/4/8625441', 0.25, 'ad1')">Show Ad 1</button>
-        </div>
-
-        <div class="ad-container" id="ad2">
-            <p>Watch Ad 2 and Earn 0.25 BDT!</p>
-            <button class="btn btn-success" onclick="openAd('https://luglawhaulsano.net/4/8625442', 0.25, 'ad2')">Show Ad 2</button>
-        </div>
-
-        <div class="ad-container" id="ad3">
-            <p>Watch Ad 3 and Earn 0.25 BDT!</p>
-            <button class="btn btn-warning" onclick="openAd('https://luglawhaulsano.net/4/8625444', 0.25, 'ad3')">Show Ad 3</button>
-        </div>
-
-        <div class="ad-container" id="ad4">
-            <p>Watch Ad 4 and Earn 0.25 BDT!</p>
-            <button class="btn btn-danger" onclick="openAd('https://luglawhaulsano.net/4/8625445', 0.25, 'ad4')">Show Ad 4</button>
-        </div>
-
-        <!-- Profile Form -->
-        <div class="profile-form" id="profileForm">
-            <h3>Edit Your Profile (One-time only)</h3>
-            <input type="text" id="username" placeholder="Enter your name" disabled>
-            <select id="gender" disabled>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
-            <input type="text" id="phone" placeholder="Enter your phone number" disabled>
-            <button onclick="saveProfile()" disabled>Save Profile</button>
-        </div>
-
-        <!-- Footer -->
-        <footer>
-            <p>All rights reserved © 2024. For payment queries, click <a href="https://t.me/BDTASKCHANNEL">Wallet</a> or contact <a href="mailto:earningfrommai@gmail.com">Admin Contact</a>.</p>
-        </footer>
+    <!-- Profile Section -->
+    <div id="profile-section" class="profile-container">
+        <h2>প্রোফাইল তথ্য আপডেট করুন</h2>
+        <form id="profile-form">
+            <div class="form-group">
+                <label for="name">নাম:</label>
+                <input type="text" id="name" name="name" placeholder="আপনার নাম লিখুন" required>
+            </div>
+            <div class="form-group">
+                <label for="email">ইমেইল:</label>
+                <input type="email" id="email" name="email" placeholder="আপনার ইমেইল লিখুন" required>
+            </div>
+            <button type="submit" class="btn btn-primary">তথ্য সেভ করুন</button>
+        </form>
     </div>
-</body>
-            </html>
-            <script>
-    // Variables to hold balance and profile data
-    let balance = 0;
-    let profile = {
-        name: "User Name",
-        gender: "male",
-        phone: "Not Set",
-        image: "https://via.placeholder.com/80"
-    };
 
-    // Function to show the profile section
-    function showProfile() {
-        document.getElementById('profileInfo').style.display = 'block';
-        document.getElementById('profileName').innerText = profile.name;
-        document.getElementById('profileImage').src = profile.image;
-        document.getElementById('profileForm').style.display = 'block';
-    }
+    <!-- Balance Section -->
+    <div id="balance-section" style="display: none;">
+        <div class="profile-info">
+            <img src="https://via.placeholder.com/50" alt="Profile Picture" id="profile-pic">
+            <span class="profile-name" id="profile-name">নাম</span>
+        </div>
+        <div class="balance-container">
+            <span>বর্তমান ব্যালেন্স:</span>
+            <span class="balance" id="balance">0.00 BDT</span>
+        </div>
+        <button id="watch-ad-btn" class="btn btn-success">অ্যাড দেখুন এবং উপার্জন করুন</button>
+    </div>
+</div>
 
-    // Function to show wallet balance
-    function showWallet() {
-        alert("Your current balance is: " + balance + " BDT");
-    }
+<script>
+    // JavaScript Code
+    const profileForm = document.getElementById('profile-form');
+    const profileSection = document.getElementById('profile-section');
+    const balanceSection = document.getElementById('balance-section');
+    const profileName = document.getElementById('profile-name');
+    const balanceElement = document.getElementById('balance');
 
-    // Function to open help
-    function openHelp() {
-        alert("For assistance, please contact us via email or the admin.");
-    }
+    // Initial balance
+    let balance = 0.0;
 
-    // Function to open admin contact page
-    function openAdminContact() {
-        window.location.href = "mailto:earningfrommai@gmail.com";
-    }
+    // Profile Save Logic
+    profileForm.addEventListener('submit', function (e) {
+        e.preventDefault();
 
-    // Function to open ad link and earn balance
-    function openAd(url, earning, adId) {
-        window.open(url, '_blank');
-        balance += earning;
-        document.getElementById('balance').innerText = balance.toFixed(2) + " BDT";
-        document.getElementById(adId).innerHTML = `<p>You've earned ${earning} BDT from this ad!</p>`;
-    }
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
 
-    // Function to save profile information
-    function saveProfile() {
-        profile.name = document.getElementById('username').value;
-        profile.gender = document.getElementById('gender').value;
-        profile.phone = document.getElementById('phone').value;
-        profile.image = "https://via.placeholder.com/80";  // Update image if needed
-        
-        // Show updated profile info
-        document.getElementById('profileName').innerText = profile.name;
-        document.getElementById('profileImage').src = profile.image;
-        
-        // Hide the profile form
-        document.getElementById('profileForm').style.display = 'none';
-        alert("Profile has been updated successfully!");
-    }
+        if (name && email) {
+            // Save profile info
+            profileName.textContent = name;
 
-    // Initial call to display the profile info
-    showProfile();
-            </script>
-            <script>
-    // Function to check if an ad has been watched or not within the 15 seconds
-    function checkAdWatched(adId) {
-        let timeSpent = parseInt(localStorage.getItem(adId + '_timeSpent') || '0');
-        if (timeSpent < 15000) {
-            alert('You must watch the ad for at least 15 seconds to earn balance.');
-            return false;
+            // Hide profile section and show balance section
+            profileSection.style.display = 'none';
+            balanceSection.style.display = 'block';
+
+            // Store profile data in localStorage to prevent multiple edits
+            localStorage.setItem('profile', JSON.stringify({ name, email }));
         }
-        return true;
+    });
+
+    // Load Profile if exists
+    const savedProfile = JSON.parse(localStorage.getItem('profile'));
+    if (savedProfile) {
+        profileName.textContent = savedProfile.name;
+        profileSection.style.display = 'none';
+        balanceSection.style.display = 'block';
     }
 
-    // Function to track ad watch time
-    function trackAdTime(adId) {
-        let startTime = new Date().getTime();
-        
-        let adTimer = setInterval(() => {
-            let currentTime = new Date().getTime();
-            let timeSpent = currentTime - startTime;
-            localStorage.setItem(adId + '_timeSpent', timeSpent);
-            
-            if (timeSpent >= 15000) {
-                clearInterval(adTimer);
+    // Update balance display
+    balanceElement.textContent = `${balance.toFixed(2)} BDT`;
+</script>
+<div id="ad-section" style="display: none;">
+    <h2>অ্যাড দেখুন</h2>
+    <iframe id="ad-frame" src="https://via.placeholder.com/300x250" width="300" height="250" style="border: none;"></iframe>
+    <p>অ্যাড দেখার সময়: <span id="ad-timer">0</span> সেকেন্ড</p>
+    <button id="exit-ad-btn" class="btn btn-danger">অ্যাড থেকে বের হন</button>
+</div>
+
+<script>
+    const adSection = document.getElementById('ad-section');
+    const watchAdBtn = document.getElementById('watch-ad-btn');
+    const exitAdBtn = document.getElementById('exit-ad-btn');
+    const adTimer = document.getElementById('ad-timer');
+
+    let adWatchTime = 0;
+    let adInterval;
+
+    // Show Ad Section
+    watchAdBtn.addEventListener('click', () => {
+        adSection.style.display = 'block';
+        balanceSection.style.display = 'none';
+        startAdTimer();
+    });
+
+    // Start Ad Timer
+    function startAdTimer() {
+        adWatchTime = 0;
+        adTimer.textContent = adWatchTime;
+        adInterval = setInterval(() => {
+            adWatchTime++;
+            adTimer.textContent = adWatchTime;
+
+            // Stop timer after 15 seconds
+            if (adWatchTime >= 15) {
+                clearInterval(adInterval);
             }
         }, 1000);
     }
 
-    // Function to handle ad display and balance updates
-    function openAd(url, earning, adId) {
-        window.open(url, '_blank');
-        
-        trackAdTime(adId);
-        
-        setTimeout(() => {
-            if (checkAdWatched(adId)) {
-                balance += earning;
-                localStorage.setItem('balance', balance);
-                document.getElementById('balance').innerText = balance.toFixed(2) + ' BDT';
-            }
-        }, 15000);  // Checking after 15 seconds
+    // Exit Ad Section
+    exitAdBtn.addEventListener('click', () => {
+        clearInterval(adInterval); // Stop the timer
+
+        // Check if ad was watched for at least 15 seconds
+        if (adWatchTime >= 15) {
+            updateBalance(0.25); // Update balance if condition met
+            alert("অভিনন্দন! আপনি 0.25 BDT অর্জন করেছেন।");
+        } else {
+            alert("আপনি পুরো ১৫ সেকেন্ড অ্যাড দেখেননি, তাই কোন ব্যালেন্স যোগ করা হয়নি।");
+        }
+
+        // Reset ad view
+        adWatchTime = 0;
+        adTimer.textContent = adWatchTime;
+        adSection.style.display = 'none';
+        balanceSection.style.display = 'block';
+    });
+
+    // Update Balance
+    function updateBalance(amount) {
+        balance += amount;
+        balanceElement.textContent = `${balance.toFixed(2)} BDT`;
+
+        // Save updated balance in localStorage
+        localStorage.setItem('balance', balance.toFixed(2));
     }
 
-    // Function to prevent showing the same ad within 24 hours
-    function showAds() {
-        let currentTime = new Date().getTime();
-        const ads = ['ad1', 'ad2', 'ad3', 'ad4'];
+    // Load Balance from Storage
+    const savedBalance = parseFloat(localStorage.getItem('balance'));
+    if (!isNaN(savedBalance)) {
+        balance = savedBalance;
+        balanceElement.textContent = `${balance.toFixed(2)} BDT`;
+    }
+</script>
+<div id="ad-list-section" style="display: none;">
+    <h2>অ্যাড লিস্ট</h2>
+    <p>অ্যাড দেখতে একটি নির্বাচন করুন:</p>
+    <ul id="ad-list"></ul>
+    <button id="back-to-dashboard-btn" class="btn btn-secondary">ড্যাশবোর্ডে ফিরে যান</button>
+</div>
 
-        ads.forEach((ad, index) => {
-            let lastShownTime = localStorage.getItem(ad + '_lastShown');
-            if (lastShownTime && (currentTime - lastShownTime < 24 * 60 * 60 * 1000)) {
-                document.getElementById(ad).style.display = 'none';  // Hide the ad if it was shown within 24 hours
-            } else {
-                document.getElementById(ad).style.display = 'block'; // Show the ad if 24 hours have passed
-            }
+<script>
+    const adListSection = document.getElementById('ad-list-section');
+    const adList = document.getElementById('ad-list');
+    const backToDashboardBtn = document.getElementById('back-to-dashboard-btn');
+
+    const ads = [
+        { id: 1, title: "অ্যাড ১", url: "https://via.placeholder.com/300x250?text=Ad+1" },
+        { id: 2, title: "অ্যাড ২", url: "https://via.placeholder.com/300x250?text=Ad+2" },
+        { id: 3, title: "অ্যাড ৩", url: "https://via.placeholder.com/300x250?text=Ad+3" }
+    ];
+
+    // Load Ads into List
+    function loadAds() {
+        adList.innerHTML = ""; // Clear previous list
+        ads.forEach(ad => {
+            const listItem = document.createElement('li');
+            listItem.textContent = ad.title;
+            listItem.className = "ad-item";
+            listItem.dataset.url = ad.url;
+
+            // Add click event to each ad
+            listItem.addEventListener('click', () => {
+                openAd(ad.url);
+            });
+
+            adList.appendChild(listItem);
         });
     }
 
-    // Function to mark an ad as shown
-    function markAdAsShown(adId) {
-        localStorage.setItem(adId + '_lastShown', new Date().getTime());
+    // Open Selected Ad
+    function openAd(adUrl) {
+        adSection.style.display = 'block';
+        adListSection.style.display = 'none';
+        document.getElementById('ad-frame').src = adUrl; // Load the selected ad into the iframe
+        startAdTimer(); // Start the timer for this ad
     }
 
-    // Call showAds to manage the ad display on page load
-    window.onload = function() {
-        showAds();
-    }
-            </script>
-            <script>
-    // Function to save and display profile info
-    function saveProfile() {
-        let username = document.getElementById('username').value;
-        let gender = document.getElementById('gender').value;
-        let phone = document.getElementById('phone').value;
+    // Show Ad List Section
+    watchAdBtn.addEventListener('click', () => {
+        adListSection.style.display = 'block';
+        balanceSection.style.display = 'none';
+        loadAds(); // Load available ads
+    });
 
-        if (username && gender && phone) {
-            localStorage.setItem('profileSaved', 'true');
-            localStorage.setItem('username', username);
-            localStorage.setItem('gender', gender);
-            localStorage.setItem('phone', phone);
+    // Back to Dashboard
+    backToDashboardBtn.addEventListener('click', () => {
+        adListSection.style.display = 'none';
+        balanceSection.style.display = 'block';
+    });
+</script>
+<!-- Dashboard Section -->
+<div id="dashboard-section">
+    <h2>ড্যাশবোর্ড</h2>
+    <p>আপনার ব্যালেন্স: <span id="balance">৳0.00</span></p>
+    <button id="watch-ad-btn" class="btn btn-primary">অ্যাড দেখুন</button>
+    <button id="profile-btn" class="btn btn-secondary">প্রোফাইল আপডেট করুন</button>
+</div>
 
-            // Update Profile Info Section
-            document.getElementById('profileName').innerText = username;
-            document.getElementById('profileImage').src = `https://via.placeholder.com/80?text=${username.charAt(0)}`;
-            alert('Profile saved successfully!');
-            document.getElementById('profileForm').style.display = 'none';
-        } else {
-            alert('Please fill all the fields');
-        }
-    }
+<!-- Watch Ad Section -->
+<div id="ad-section" style="display: none;">
+    <h2>অ্যাড দেখুন</h2>
+    <iframe id="ad-frame" width="300" height="250"></iframe>
+    <p>অ্যাড দেখার সময়: <span id="timer">15</span> সেকেন্ড</p>
+    <button id="close-ad-btn" class="btn btn-danger">অ্যাড বন্ধ করুন</button>
+</div>
 
-    // Function to show Profile info (Editable if first time)
-    function showProfile() {
-        if(localStorage.getItem('profileSaved') === 'true') {
-            document.getElementById('profileName').innerText = localStorage.getItem('username');
-            document.getElementById('profileImage').src = `https://via.placeholder.com/80?text=${localStorage.getItem('username').charAt(0)}`;
-            document.getElementById('profileForm').style.display = 'none';
-            document.getElementById('profileInfo').style.display = 'block';
-        } else {
-            document.getElementById('profileForm').style.display = 'block';
-            document.getElementById('profileInfo').style.display = 'none';
-        }
-    }
+<script>
+    const watchAdBtn = document.getElementById('watch-ad-btn');
+    const profileBtn = document.getElementById('profile-btn');
+    const balanceElement = document.getElementById('balance');
+    const adSection = document.getElementById('ad-section');
+    const timerElement = document.getElementById('timer');
+    const closeAdBtn = document.getElementById('close-ad-btn');
 
-    // Modify showWallet() to open the Wallet link
-    function showWallet() {
-        window.location.href = 'https://t.me/BDTASKCHANNEL';
-    }
+    let balance = 0.00;
+    let adTimer;
+    let timeLeft = 15;
 
-    // Modify openSupport() to change to Admin Contact
-    function openSupport() {
-        window.location.href = 'mailto:earningfrommai@gmail.com';
-    }
-
-    // Modify function to show Help page
-    function openHelp() {
-        window.location.href = 'https://t.me/EarningFromMAI';
-    }
-
-    // Initialize the page and load stored data
-    window.onload = function() {
-        // Show Profile Information if already saved
-        if (localStorage.getItem('profileSaved') === 'true') {
-            document.getElementById('profileName').innerText = localStorage.getItem('username');
-            document.getElementById('profileImage').src = `https://via.placeholder.com/80?text=${localStorage.getItem('username').charAt(0)}`;
-            document.getElementById('profileForm').style.display = 'none';
-        }
-
-        // Load balance from localStorage
-        let balance = parseFloat(localStorage.getItem('balance') || '0');
-        document.getElementById('balance').innerText = `${balance.toFixed(2)} BDT`;
-    }
-            </script>
-            <script>
-    // Check if the user watched the ad for 15 seconds
-    function openAd(url, earning, adId) {
-        let startTime = Date.now();  // Record the start time
-
-        // Open the ad in a new window/tab
-        window.open(url, '_blank');
-
-        // Wait for 15 seconds (simulate ad watching time)
-        setTimeout(function() {
-            let elapsedTime = Date.now() - startTime;
-
-            // If the user stayed for at least 15 seconds, update balance
-            if (elapsedTime >= 15000) {
-                updateBalance(earning);
-                document.getElementById(adId).style.display = 'none';
-            } else {
-                alert('You did not watch the ad for 15 seconds. No balance added.');
+    // Start ad timer when ad is displayed
+    function startAdTimer() {
+        timeLeft = 15;
+        timerElement.textContent = timeLeft;
+        adTimer = setInterval(() => {
+            timeLeft--;
+            timerElement.textContent = timeLeft;
+            if (timeLeft === 0) {
+                clearInterval(adTimer);
+                updateBalance(true); // Update balance after ad completion
             }
-        }, 15000);  // 15 seconds timeout for ad watching
+        }, 1000);
     }
 
-    // Update balance function
-    function updateBalance(credits) {
-        let balance = parseFloat(localStorage.getItem('balance') || '0');
-        balance += credits;
-        localStorage.setItem('balance', balance.toFixed(2));
-        document.getElementById('balance').innerText = `${balance.toFixed(2)} BDT`;
-    }
-
-    // Show Ads if they were not viewed in the last 24 hours
-    function checkAdAvailability(adId, adUrl, earning, adButtonId) {
-        let lastViewed = localStorage.getItem(adId);
-        let currentTime = Date.now();
-
-        // If the ad was viewed within the last 24 hours, hide it
-        if (lastViewed && (currentTime - lastViewed < 24 * 60 * 60 * 1000)) {
-            document.getElementById(adButtonId).style.display = 'none';
-        } else {
-            // If more than 24 hours passed, allow the user to watch the ad
-            document.getElementById(adButtonId).style.display = 'block';
-            document.getElementById(adButtonId).onclick = function() {
-                openAd(adUrl, earning, adId);
-                localStorage.setItem(adId, currentTime);  // Store the current time when ad is clicked
-            };
+    // Update balance after ad completion
+    function updateBalance(adCompleted) {
+        if (adCompleted) {
+            balance += 0.25; // Increase balance by 0.25 BDT after watching ad
         }
+        balanceElement.textContent = `৳${balance.toFixed(2)}`;
     }
 
-    // Initialize the ads check
-    window.onload = function() {
-        // Check availability of ads based on time
-        checkAdAvailability('ad1', 'https://luglawhaulsano.net/4/8625441', 0.25, 'ad1');
-        checkAdAvailability('ad2', 'https://luglawhaulsano.net/4/8625442', 0.25, 'ad2');
-        checkAdAvailability('ad3', 'https://luglawhaulsano.net/4/8625444', 0.25, 'ad3');
-        checkAdAvailability('ad4', 'https://luglawhaulsano.net/4/8625445', 0.25, 'ad4');
-    }
-            </script>
+    // Close ad before 15 seconds and prevent balance update
+    closeAdBtn.addEventListener('click', () => {
+        clearInterval(adTimer);
+        adSection.style.display = 'none';
+        balanceSection.style.display = 'block';
+        updateBalance(false); // Do not update balance if ad was not completed
+    });
+
+    // Watch ad button
+    watchAdBtn.addEventListener('click', () => {
+        adSection.style.display = 'block';
+        balanceSection.style.display = 'none';
+        startAdTimer(); // Start ad timer
+    });
+
+    // Profile button (to be developed for profile update functionality)
+    profileBtn.addEventListener('click', () => {
+        // Show profile update section (if necessary)
+        alert("Profile update functionality not implemented yet.");
+    });
+
+    // Handle page unload: Prevent balance update if user leaves early
+    window.addEventListener('beforeunload', () => {
+        clearInterval(adTimer); // Clear the ad timer if the user leaves the page
+        if (timeLeft < 15) {
+            updateBalance(false); // If user did not watch full ad, do not update balance
+        }
+    });
+</script>
